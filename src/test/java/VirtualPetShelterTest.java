@@ -104,6 +104,7 @@ public class VirtualPetShelterTest {
 		assertEquals(75, check);
 
 	}
+
 	@Test
 	public void testThatWalkingPetChangesNeedsToPoop() {
 		VirtualPetShelter underTest = new VirtualPetShelter();
@@ -131,6 +132,37 @@ public class VirtualPetShelterTest {
 		underTest.walkAPet("fido");
 		check = underTest.getPet("fido").getNeedsToPee();
 		assertEquals(false, check);
+
+	}
+
+	@Test
+	public void testThatTickMethodChangesAttributeLevels() {
+		VirtualPetShelter underTest = new VirtualPetShelter();
+		underTest.addPet(new VirtualPet("fido", "the ferocious", 5, 5, 50));
+		underTest.addPet(new VirtualPet("feefee", "the furious", 10, 10, 60));
+		underTest.addPet(new VirtualPet("spot", "the spotty", 15, 15, 70));
+		underTest.tick();
+		underTest.tick();
+		int check1 = underTest.getPet("fido").getHungerLevel();
+		int check2 = underTest.getPet("fido").getThirstLevel();
+		int check3 = underTest.getPet("fido").getActivityLevel();
+		assertEquals(15, check1);
+		assertEquals(15, check2);
+		assertEquals(40, check3);
+
+		int check11 = underTest.getPet("feefee").getHungerLevel();
+		int check12 = underTest.getPet("feefee").getThirstLevel();
+		int check13 = underTest.getPet("feefee").getActivityLevel();
+		assertEquals(20, check11);
+		assertEquals(20, check12);
+		assertEquals(50, check13);
+
+		int check21 = underTest.getPet("spot").getHungerLevel();
+		int check22 = underTest.getPet("spot").getThirstLevel();
+		int check23 = underTest.getPet("spot").getActivityLevel();
+		assertEquals(25, check21);
+		assertEquals(25, check22);
+		assertEquals(60, check23);
 
 	}
 
