@@ -95,6 +95,45 @@ public class VirtualPetShelterTest {
 
 	}
 
+	@Test
+	public void testThatWalkingPetChangesActivityLevel() {
+		VirtualPetShelter underTest = new VirtualPetShelter();
+		underTest.addPet(new VirtualPet("fido", "the ferocious", 5, 5, 5));
+		underTest.walkAPet("fido");
+		int check = underTest.getPet("fido").getActivityLevel();
+		assertEquals(75, check);
+
+	}
+	@Test
+	public void testThatWalkingPetChangesNeedsToPoop() {
+		VirtualPetShelter underTest = new VirtualPetShelter();
+		underTest.addPet(new VirtualPet("fido", "the ferocious", 5, 5, 5));
+		boolean check = underTest.getPet("fido").getNeedsToPoop();
+		assertEquals(false, check);
+		underTest.getPet("fido").eat();
+		check = underTest.getPet("fido").getNeedsToPoop();
+		assertEquals(true, check);
+		underTest.walkAPet("fido");
+		check = underTest.getPet("fido").getNeedsToPoop();
+		assertEquals(false, check);
+
+	}
+
+	@Test
+	public void testThatWalkingPetChangesNeedsToPee() {
+		VirtualPetShelter underTest = new VirtualPetShelter();
+		underTest.addPet(new VirtualPet("fido", "the ferocious", 5, 5, 5));
+		boolean check = underTest.getPet("fido").getNeedsToPee();
+		assertEquals(false, check);
+		underTest.getPet("fido").drink();
+		check = underTest.getPet("fido").getNeedsToPee();
+		assertEquals(true, check);
+		underTest.walkAPet("fido");
+		check = underTest.getPet("fido").getNeedsToPee();
+		assertEquals(false, check);
+
+	}
+
 }
 /*
  * @Test public void shouldBeAbleToCreateABankAccountWithData() { // accountNum,

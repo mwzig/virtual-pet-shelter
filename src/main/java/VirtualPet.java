@@ -41,6 +41,14 @@ public class VirtualPet {
 		return activityLevel;
 	}
 
+	public boolean getNeedsToPoop() {
+		return needsToPoop;
+	}
+	
+	public boolean getNeedsToPee() {
+		return needsToPee;
+	}
+	
 	String getStatus() {
 		String status = "";
 		boolean needsSomething = false;

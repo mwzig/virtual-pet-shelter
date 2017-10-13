@@ -39,7 +39,18 @@ public class VirtualPetShelter {
 			eachPet.getValue().drink();
 		}
 	}
+	
+	public void walkAPet(String name) {
+		VirtualPet aPet = pets.get(name);
+		aPet.goForWalk();
+		
+	}
 
+	public void PlayWithAPet(String name) {
+		VirtualPet aPet = pets.get(name);
+		aPet.play();
+		
+	}
 
 	public int getNumberOfPets() {
 		return pets.size();
