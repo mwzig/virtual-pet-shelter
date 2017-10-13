@@ -26,7 +26,7 @@ public class VirtualPetShelterTest {
 	}
 
 	// This is a little confusing, but we are removing
-	// an existing pet, and comparing the object returned 
+	// an existing pet, and comparing the object returned
 	// from the function that removes an object from the map
 	// (which is the object being removed) to a different object
 	// This test actually should fail - hence the notequals
@@ -62,6 +62,36 @@ public class VirtualPetShelterTest {
 		VirtualPet petToRemove = underTest.releasePet("fido");
 		check = underTest.getNumberOfPets();
 		assertEquals(2, check);
+
+	}
+
+	@Test
+	public void testThatFeedPetsChangesHungerLevel() {
+		VirtualPetShelter underTest = new VirtualPetShelter();
+		underTest.addPet(new VirtualPet("fido", "the ferocious", 5, 5, 5));
+		underTest.addPet(new VirtualPet("feefee", "the furious", 10, 5, 5));
+		underTest.feedPets();
+		VirtualPet pet1 = underTest.getPet("fido");
+		int check = pet1.getHungerLevel();
+		assertEquals(0, check);
+		VirtualPet pet2 = underTest.getPet("feefee");
+		check = pet2.getHungerLevel();
+		assertEquals(0, check);
+
+	}
+
+	@Test
+	public void testThatWaterPetsChangesThirstLevel() {
+		VirtualPetShelter underTest = new VirtualPetShelter();
+		underTest.addPet(new VirtualPet("fido", "the ferocious", 5, 5, 5));
+		underTest.addPet(new VirtualPet("feefee", "the furious", 10, 10, 5));
+		underTest.waterPets();
+		VirtualPet pet1 = underTest.getPet("fido");
+		int check = pet1.getThirstLevel();
+		assertEquals(0, check);
+		VirtualPet pet2 = underTest.getPet("feefee");
+		check = pet2.getThirstLevel();
+		assertEquals(0, check);
 
 	}
 
