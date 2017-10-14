@@ -9,8 +9,9 @@ public class VirtualPet {
 	private int activityLevel;
 	private boolean needsToPee;
 	private boolean needsToPoop;
+	private String cageStatus = "Clean";
 
-	// constructor - takes all attributes as parameters
+	// constructor - takes all attributes as parameters except for cageStatus
 	public VirtualPet(String name, String description, int hungerLevel, int thirstLevel, int activityLevel, boolean bNeedsToPee, boolean bNeedsToPoop) {
 		this.name = name;
 		this.description = description;
@@ -34,7 +35,7 @@ public class VirtualPet {
 	}
 
 	// constructor - takes all attributes as parameters
-	// except the need to pee or poop
+	// except the need to pee or poop and cageStatus
 		public VirtualPet(String name, String description, int hungerLevel, int thirstLevel, int activityLevel) {
 			this.name = name;
 			this.description = description;
@@ -108,15 +109,13 @@ public class VirtualPet {
 			status += ")";
 		}
 		// If the pet gets hungry, thirsty, needs exercise, and needs to pee and poop,
-		// it will take care of its own needs by peeing and pooping on the floor, eating
-		// your shoe, and then throwing up on your bed.
-		//
+		// it will take care of its own needs by peeing and pooping on the floor
 		if (hungerLevel >= 50 && thirstLevel >= 50 && activityLevel < 33 && needsToPee && needsToPoop) {
-			status += "\nUh-Oh!!!  You have not been taking good care of your pet! ";
-			status += "\nShe ate your shoe, peed and pooped on the floor, and threw up on your bed!";
+			status += "\nUh-Oh!!!  You have not been taking good care of " + this.name;
+			status += this.name = " peed and pooped on the floor!";
 		} else {
 			if (!needsSomething) {
-				status += "Great Job! You are taking wonderful care of your pet!";
+				status += "Great Job! You are taking wonderful care of " + this.name;
 			}
 		}
 		return status;
@@ -126,8 +125,16 @@ public class VirtualPet {
 		hungerLevel += 5;
 		thirstLevel += 5;
 		activityLevel -= 5;
+		if (hungerLevel >= 50 && thirstLevel >= 50 && activityLevel < 33 && needsToPee && needsToPoop) {
+			cageStatus = "Dirty";
+		}
+		
 	}
 
+	void cleanCage() {
+		cageStatus = "Clean";
+	}
+	
 	void eat() {
 		hungerLevel = 0;
 		needsToPoop = true;

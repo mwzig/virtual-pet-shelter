@@ -4,6 +4,9 @@ import java.util.Scanner;
 public class VirtualPetShelterApp {
 
 	add to lower case where necessary
+	think about cage status on constructor
+	
+	
 	public static void main(String[] args) {
 
 		VirtualPetShelter myShelter = new VirtualPetShelter();
