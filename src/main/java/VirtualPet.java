@@ -9,10 +9,11 @@ public class VirtualPet {
 	private int activityLevel;
 	private boolean needsToPee;
 	private boolean needsToPoop;
-	private String cageStatus = "Clean";
+	private boolean madeAMess;
 
-	// constructor - takes all attributes as parameters except for cageStatus
-	public VirtualPet(String name, String description, int hungerLevel, int thirstLevel, int activityLevel, boolean bNeedsToPee, boolean bNeedsToPoop) {
+	// constructor - takes all attributes as parameters except for madeAMess
+	public VirtualPet(String name, String description, int hungerLevel, int thirstLevel, int activityLevel,
+			boolean bNeedsToPee, boolean bNeedsToPoop) {
 		this.name = name;
 		this.description = description;
 		this.hungerLevel = hungerLevel;
@@ -20,9 +21,10 @@ public class VirtualPet {
 		this.activityLevel = activityLevel;
 		this.needsToPee = bNeedsToPee;
 		this.needsToPoop = bNeedsToPoop;
+		this.madeAMess = false;
 	}
 
-	// constructor - takes just name and description as parameters
+	// constructor - takes only name and description as parameters
 	// other values set to default
 	public VirtualPet(String name, String description) {
 		this.name = name;
@@ -32,35 +34,30 @@ public class VirtualPet {
 		this.activityLevel = 10;
 		this.needsToPee = false;
 		this.needsToPoop = false;
+		this.madeAMess = false;
 	}
 
 	// constructor - takes all attributes as parameters
-	// except the need to pee or poop and cageStatus
-		public VirtualPet(String name, String description, int hungerLevel, int thirstLevel, int activityLevel) {
-			this.name = name;
-			this.description = description;
-			this.hungerLevel = hungerLevel;
-			this.thirstLevel = thirstLevel;
-			this.activityLevel = activityLevel;
-			this.needsToPee = false;
-			this.needsToPoop = false;
-		}
-
+	// except the need to pee or poop and madeAMess
+	public VirtualPet(String name, String description, int hungerLevel, int thirstLevel, int activityLevel) {
+		this.name = name;
+		this.description = description;
+		this.hungerLevel = hungerLevel;
+		this.thirstLevel = thirstLevel;
+		this.activityLevel = activityLevel;
+		this.needsToPee = false;
+		this.needsToPoop = false;
+		this.madeAMess = false;
+	}
 
 	// getters
 	public String getName() {
 		return name;
 	}
-	
+
 	public String getDescription() {
 		return description;
 	}
-
-	/*
-	public String getFullName() {
-		String fullName = name + " " + Description;
-		return fullName;
-	}*/
 
 	public int getHungerLevel() {
 		return hungerLevel;
@@ -74,12 +71,16 @@ public class VirtualPet {
 		return activityLevel;
 	}
 
+	public boolean getNeedsToPee() {
+		return needsToPee;
+	}
+
 	public boolean getNeedsToPoop() {
 		return needsToPoop;
 	}
 
-	public boolean getNeedsToPee() {
-		return needsToPee;
+	public boolean getMadeAMess() {
+		return madeAMess;
 	}
 
 	String getStatus() {
@@ -125,16 +126,11 @@ public class VirtualPet {
 		hungerLevel += 5;
 		thirstLevel += 5;
 		activityLevel -= 5;
-		if (hungerLevel >= 50 && thirstLevel >= 50 && activityLevel < 33 && needsToPee && needsToPoop) {
-			cageStatus = "Dirty";
+		if (activityLevel < 33 && needsToPee && needsToPoop) {
+			madeAMess = true;
 		}
-		
 	}
 
-	void cleanCage() {
-		cageStatus = "Clean";
-	}
-	
 	void eat() {
 		hungerLevel = 0;
 		needsToPoop = true;
@@ -168,5 +164,16 @@ public class VirtualPet {
 		needsToPoop = false;
 	}
 
+	// We need to reset needsToPee and needsToPoop here to false because otherwise
+	// the
+	// cage status will rarely be set to clean since the tick method determines
+	// clean
+	// or dirty based on needsToPee and needsToPoop and activity level.
+	// Assume the pet goes out (call goOut()) while the cage is being cleaned.
+	void haveMessCleanedUp() {
+		madeAMess = false;
+		goOut();
+
+	}
 
 }
