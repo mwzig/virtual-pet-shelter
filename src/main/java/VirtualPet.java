@@ -105,15 +105,17 @@ public class VirtualPet {
 				status += "Needs to pee! ";
 			}
 			if (needsToPoop) {
-				status += "Needs to poop!";
+				status += "Needs to poop! ";
 			}
+			if (needsToPoop) {
+				status += "Made a mess!";
+			}
+
 			status += ")";
 		}
-		// If the pet gets hungry, thirsty, needs exercise, and needs to pee and poop,
-		// it will take care of its own needs by peeing and pooping on the floor
+		
 		if (hungerLevel >= 50 && thirstLevel >= 50 && activityLevel < 33 && needsToPee && needsToPoop) {
 			status += "\nUh-Oh!!!  You have not been taking good care of " + this.name;
-			status += this.name = " peed and pooped on the floor!";
 		} else {
 			if (!needsSomething) {
 				status += "Great Job! You are taking wonderful care of " + this.name;
@@ -165,10 +167,8 @@ public class VirtualPet {
 	}
 
 	// We need to reset needsToPee and needsToPoop here to false because otherwise
-	// the
-	// cage status will rarely be set to clean since the tick method determines
-	// clean
-	// or dirty based on needsToPee and needsToPoop and activity level.
+	// the cage status will rarely be set to clean since the tick method determines
+	// clean or dirty based on needsToPee and needsToPoop and activity level.
 	// Assume the pet goes out (call goOut()) while the cage is being cleaned.
 	void haveMessCleanedUp() {
 		madeAMess = false;

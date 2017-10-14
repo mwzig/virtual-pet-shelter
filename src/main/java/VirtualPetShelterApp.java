@@ -65,16 +65,19 @@ public class VirtualPetShelterApp {
 				handlePetAdmission(myShelter);
 				break;
 			case "9":
+				System.out.println("No Problem! You want to check on a specific pet.  Please choose one:  \n");
+				handlePetCheck(myShelter);
+				break;
+			case "10":
 				System.out.println("You loved our pizza!");
 				break;
-
-			case "10":
+			case "11":
 				System.out.println("Thanks for playing the Virtual Pet Shelter game!");
 				break;
 			}
 			myShelter.tick();
 
-		} while (!userOption.equals("10"));
+		} while (!userOption.equals("11"));
 
 	}
 
@@ -170,6 +173,22 @@ public class VirtualPetShelterApp {
 		}
 	}
 
+	public static void handlePetCheck(VirtualPetShelter myShelter) {
+
+		displayPetNamesAndDescriptions(myShelter);
+		Scanner input = new Scanner(System.in);
+		String petName = input.nextLine();
+		// the user may have typed an invalid name, if so give them a message and
+		// go back to the menu
+		VirtualPet petToCheck = myShelter.getPet(petName);
+		if (petToCheck == null) { 
+			System.out.println("Sorry, the name you typed does not match one of our pets.");
+		} else {
+			System.out.println(petToCheck.getStatus());
+			System.out.println("Thanks for checking on " + petName + "!\n\n");
+		}
+	}
+
 	public static void handlePetAdmission(VirtualPetShelter myShelter) {
 
 		Scanner input = new Scanner(System.in);
@@ -177,8 +196,12 @@ public class VirtualPetShelterApp {
 		String petName = input.nextLine();
 		System.out.println("Please provide a brief description of your pet:");
 		String petDescription = input.nextLine();
-		myShelter.addPet(new VirtualPet(petName, petDescription));
-		System.out.println("Don't worry, we will find a great home for " + petName + "!\n\n");
+		if (petName.isEmpty() || petDescription.isEmpty()) {
+			System.out.println("Sorry, you must enter both a pet name and a description.");
+		} else {
+			myShelter.addPet(new VirtualPet(petName, petDescription));
+			System.out.println("Don't worry, we will find a great home for " + petName + "!\n\n");
+		}
 	}
 
 	public static void displayMainMenu() {
@@ -192,8 +215,9 @@ public class VirtualPetShelterApp {
 		System.out.println("\t6. Clean a cage");
 		System.out.println("\t7. Adopt a pet");
 		System.out.println("\t8. Admit a pet");
-		System.out.println("\t9. Eat pizza");
-		System.out.println("\t10. Quit");
+		System.out.println("\t9. Check on a specific pet");
+		System.out.println("\t10. Eat pizza");
+		System.out.println("\t11. Quit");
 
 	}
 

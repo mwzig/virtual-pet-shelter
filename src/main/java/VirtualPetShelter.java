@@ -9,7 +9,7 @@ public class VirtualPetShelter {
 
 	// This method returns a Collection of Virtual Pet objects
 	// It mimics the Pet Shelter's database of Virtual Pets.
-	// A collection is easier to iterate through than a Map.
+	// A collection is necessary to be able to iterate through each entry.
 	public Collection<VirtualPet> getAllPets() {
 		return pets.values();
 	}
@@ -47,10 +47,9 @@ public class VirtualPetShelter {
 		}
 	}
 
-	// If the user supplies a pet name that does not exist, the Virtual Pet object
-	// returned by the get method will be null. Since we are not doing front-end
-	// editing, check it here to make sure it is not null before calling goForWalk()
-	// so that we don't crash with a null pointer exception.
+	// If a name is supplied that does not exist, the Virtual Pet object "returned"
+	// will be null. Just to be safe, check it for not null before using it,
+	// otherwise we could potentially crash with a null pointer exception.
 	public void walkAPet(String name) {
 
 		VirtualPet aPet = pets.get(name);
@@ -60,12 +59,9 @@ public class VirtualPetShelter {
 
 	}
 
-	// If the user supplies a pet name that does not exist, the Virtual Pet object
-	// returned by the get method will be null. Since we are not doing front end
-	// editing,
-	// check it here to make sure it is not null before calling play() so that we
-	// don't crash with
-	// a null pointer exception.
+	// If a name is supplied that does not exist, the Virtual Pet object "returned"
+	// will be null. Just to be safe, check it for not null before using it,
+	// otherwise we could potentially crash with a null pointer exception.
 	public void playWithAPet(String name) {
 
 		VirtualPet aPet = pets.get(name);
@@ -75,10 +71,9 @@ public class VirtualPetShelter {
 
 	}
 
-	// If the user supplies a pet name that does not exist, the Virtual Pet object
-	// returned by the get method will be null. Since we are not doing front end
-	// editing, check it here to make sure it is not null before calling goOut() so
-	// that we don't crash with a null pointer exception.
+	// If a name is supplied that does not exist, the Virtual Pet object "returned"
+	// will be null. Just to be safe, check it for not null before using it,
+	// otherwise we could potentially crash with a null pointer exception.
 	public void takeAPetOutside(String name) {
 
 		VirtualPet aPet = pets.get(name);
@@ -88,16 +83,16 @@ public class VirtualPetShelter {
 
 	}
 
-	// If the user supplies a pet name that does not exist, the Virtual Pet object
-	// returned by the get method will be null. Since we are not doing front end
-	// editing, check it here to make sure it is not null before calling
-	// haveMessCleanedUp() so that we don't crash with a null pointer exception.
+	// If a name is supplied that does not exist, the Virtual Pet object "returned"
+	// will be null. Just to be safe, check it for not null before using it,
+	// otherwise we could potentially crash with a null pointer exception.
 	public void cleanCage(String name) {
 
 		VirtualPet aPet = pets.get(name);
 		if (aPet != null) {
 			aPet.haveMessCleanedUp();
 		}
+
 	}
 
 	public int getNumberOfPets() {
