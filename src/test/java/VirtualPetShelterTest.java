@@ -5,6 +5,20 @@ import org.junit.Test;
 public class VirtualPetShelterTest {
 
 	@Test
+	public void shouldBeAbleToCreateVirtualPetWithNameAndDescOnly() {
+		VirtualPet underTest = new VirtualPet("Fido", "the great");
+		String check = underTest.getFullName();
+		assertEquals("Fido the great", check);
+		int check2 = underTest.getActivityLevel();
+		assertEquals(10, check2);
+		check2 = underTest.getHungerLevel();
+		assertEquals(10, check2);
+		check2 = underTest.getThirstLevel();
+		assertEquals(10, check2);
+		
+	}
+	
+	@Test
 	public void shouldBeAbleToCreateAVirtualPetShelterMap() {
 		VirtualPetShelter underTest = new VirtualPetShelter();
 		underTest.addPet(new VirtualPet("fido", "the ferocious", 5, 5, 5));
@@ -23,22 +37,6 @@ public class VirtualPetShelterTest {
 		// assertEquals(null, check);
 		assertNull(check);
 		// assertEquals(checkPet, check);
-	}
-
-	// This is a little confusing, but we are removing
-	// an existing pet, and comparing the object returned
-	// from the function that removes an object from the map
-	// (which is the object being removed) to a different object
-	// This test actually should fail - hence the notequals
-	@Test
-	public void testReleaseExistingPetFails() {
-		VirtualPetShelter underTest = new VirtualPetShelter();
-		VirtualPet testPet = new VirtualPet("fido", "the ferocius", 5, 5, 5);
-		VirtualPet testPet2 = new VirtualPet("fidooop", "the ferocius", 5, 5, 5);
-		underTest.addPet(testPet);
-		VirtualPet check = underTest.releasePet("fido");
-		assertNotEquals(testPet2, check);
-
 	}
 
 	@Test
@@ -79,6 +77,29 @@ public class VirtualPetShelterTest {
 		assertEquals(0, check);
 
 	}
+	// Verify that after constructing, the pet does not need
+	// to poop.  After feeding, the pet should need to poop.
+	@Test
+	public void testThatFeedPetsCausesNeedToPoop() {
+		VirtualPetShelter underTest = new VirtualPetShelter();
+		underTest.addPet(new VirtualPet("fido", "the ferocious", 5, 5, 5));
+		underTest.addPet(new VirtualPet("feefee", "the furious", 10, 5, 5));
+		VirtualPet pet1 = underTest.getPet("fido");
+		boolean check = pet1.getNeedsToPoop();
+		assertFalse(check);
+		VirtualPet pet2 = underTest.getPet("feefee");
+		check = pet2.getNeedsToPoop();
+		assertFalse(check);
+		underTest.feedPets();
+		pet1 = underTest.getPet("fido");
+		check = pet1.getNeedsToPoop();
+		assertTrue(check);
+		pet2 = underTest.getPet("feefee");
+		check = pet2.getNeedsToPoop();
+		assertTrue(check);
+
+	}
+
 
 	@Test
 	public void testThatWaterPetsChangesThirstLevel() {
@@ -94,6 +115,39 @@ public class VirtualPetShelterTest {
 		assertEquals(0, check);
 
 	}
+
+	@Test
+	public void testThatWaterPetsCausesNeedToPee() {
+		VirtualPetShelter underTest = new VirtualPetShelter();
+		underTest.addPet(new VirtualPet("fido", "the ferocious", 5, 5, 5));
+		underTest.addPet(new VirtualPet("feefee", "the furious", 10, 5, 5));
+		VirtualPet pet1 = underTest.getPet("fido");
+		boolean check = pet1.getNeedsToPee();
+		assertFalse(check);
+		VirtualPet pet2 = underTest.getPet("feefee");
+		check = pet2.getNeedsToPee();
+		assertFalse(check);
+		underTest.waterPets();
+		pet1 = underTest.getPet("fido");
+		check = pet1.getNeedsToPee();
+		assertTrue(check);
+		pet2 = underTest.getPet("feefee");
+		check = pet2.getNeedsToPee();
+		assertTrue(check);
+
+	}
+
+
+	@Test
+	public void testThatPlayingWIthChangesActivityLevel() {
+		VirtualPetShelter underTest = new VirtualPetShelter();
+		underTest.addPet(new VirtualPet("fido", "the ferocious", 5, 5, 5));
+		underTest.PlayWithAPet("fido");
+		int check = underTest.getPet("fido").getActivityLevel();
+		assertEquals(75, check);
+
+	}
+
 
 	@Test
 	public void testThatWalkingPetChangesActivityLevel() {

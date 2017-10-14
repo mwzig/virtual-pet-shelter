@@ -3,21 +3,48 @@ public class VirtualPet {
 
 	// attributes
 	private String name;
-	private String nameDescriptor;
+	private String Description;
 	private int hungerLevel;
 	private int thirstLevel;
 	private int activityLevel;
-	private boolean needsToPee = false;
-	private boolean needsToPoop = false;
+	private boolean needsToPee;
+	private boolean needsToPoop;
 
-	// constructor
-	public VirtualPet(String name, String nameDescriptor, int hungerLevel, int thirstLevel, int activityLevel) {
+	// constructor - takes all attributes as parameters
+	public VirtualPet(String name, String description, int hungerLevel, int thirstLevel, int activityLevel, boolean bNeedsToPee, boolean bNeedsToPoop) {
 		this.name = name;
-		this.nameDescriptor = nameDescriptor;
+		this.Description = description;
 		this.hungerLevel = hungerLevel;
 		this.thirstLevel = thirstLevel;
 		this.activityLevel = activityLevel;
+		this.needsToPee = bNeedsToPee;
+		this.needsToPoop = bNeedsToPoop;
 	}
+
+	// constructor - takes just name and description as parameters
+	// other values set to default
+	public VirtualPet(String name, String description) {
+		this.name = name;
+		this.Description = description;
+		this.hungerLevel = 10;
+		this.thirstLevel = 10;
+		this.activityLevel = 10;
+		this.needsToPee = false;
+		this.needsToPoop = false;
+	}
+
+	// constructor - takes all attributes as parameters
+	// except the need to pee or poop
+		public VirtualPet(String name, String description, int hungerLevel, int thirstLevel, int activityLevel) {
+			this.name = name;
+			this.Description = description;
+			this.hungerLevel = hungerLevel;
+			this.thirstLevel = thirstLevel;
+			this.activityLevel = activityLevel;
+			this.needsToPee = false;
+			this.needsToPoop = false;
+		}
+
 
 	// getters
 	public String getName() {
@@ -25,7 +52,7 @@ public class VirtualPet {
 	}
 
 	public String getFullName() {
-		String fullName = name + " " + nameDescriptor;
+		String fullName = name + " " + Description;
 		return fullName;
 	}
 
@@ -44,11 +71,11 @@ public class VirtualPet {
 	public boolean getNeedsToPoop() {
 		return needsToPoop;
 	}
-	
+
 	public boolean getNeedsToPee() {
 		return needsToPee;
 	}
-	
+
 	String getStatus() {
 		String status = "";
 		boolean needsSomething = false;
