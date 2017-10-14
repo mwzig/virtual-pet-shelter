@@ -7,17 +7,19 @@ public class VirtualPetShelterTest {
 	@Test
 	public void shouldBeAbleToCreateVirtualPetWithNameAndDescOnly() {
 		VirtualPet underTest = new VirtualPet("Fido", "the great");
-		String check = underTest.getFullName();
-		assertEquals("Fido the great", check);
+		String check = underTest.getName();
+		assertEquals("Fido", check);
+		check = underTest.getDescription();
+		assertEquals("the great", check);
 		int check2 = underTest.getActivityLevel();
 		assertEquals(10, check2);
 		check2 = underTest.getHungerLevel();
 		assertEquals(10, check2);
 		check2 = underTest.getThirstLevel();
 		assertEquals(10, check2);
-		
+
 	}
-	
+
 	@Test
 	public void shouldBeAbleToCreateAVirtualPetShelterMap() {
 		VirtualPetShelter underTest = new VirtualPetShelter();
@@ -77,8 +79,9 @@ public class VirtualPetShelterTest {
 		assertEquals(0, check);
 
 	}
+
 	// Verify that after constructing, the pet does not need
-	// to poop.  After feeding, the pet should need to poop.
+	// to poop. After feeding, the pet should need to poop.
 	@Test
 	public void testThatFeedPetsCausesNeedToPoop() {
 		VirtualPetShelter underTest = new VirtualPetShelter();
@@ -99,7 +102,6 @@ public class VirtualPetShelterTest {
 		assertTrue(check);
 
 	}
-
 
 	@Test
 	public void testThatWaterPetsChangesThirstLevel() {
@@ -137,17 +139,15 @@ public class VirtualPetShelterTest {
 
 	}
 
-
 	@Test
 	public void testThatPlayingWIthChangesActivityLevel() {
 		VirtualPetShelter underTest = new VirtualPetShelter();
 		underTest.addPet(new VirtualPet("fido", "the ferocious", 5, 5, 5));
-		underTest.PlayWithAPet("fido");
+		underTest.playWithAPet("fido");
 		int check = underTest.getPet("fido").getActivityLevel();
 		assertEquals(75, check);
 
 	}
-
 
 	@Test
 	public void testThatWalkingPetChangesActivityLevel() {

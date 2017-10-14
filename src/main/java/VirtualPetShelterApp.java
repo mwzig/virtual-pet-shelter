@@ -3,6 +3,7 @@ import java.util.Scanner;
 
 public class VirtualPetShelterApp {
 
+	add to lower case where necessary
 	public static void main(String[] args) {
 
 		VirtualPetShelter myShelter = new VirtualPetShelter();
