@@ -1,5 +1,4 @@
 import java.util.Collection;
-import java.util.Map.Entry;
 import java.util.Scanner;
 
 public class VirtualPetShelterApp {
@@ -22,7 +21,6 @@ public class VirtualPetShelterApp {
 	public static void displayPetStatus(VirtualPetShelter myShelter) {
 
 		String needsToGoOut = "(Not Yet)";
-		String status = "";
 
 		System.out.println("This is the status of your pets:\n");
 		System.out.println("Name           |Hunger  |Thirst  |Activity Level |Needs to Go Out");
@@ -36,7 +34,7 @@ public class VirtualPetShelterApp {
 				needsToGoOut = "(Not Yet)";
 			}
 			// At least five-wide, left-justified printf("'%-5d'", 10);
-			System.out.printf("%-15s", "Hello");
+			System.out.printf("%-15s", shelterPet.getName());
 			System.out.print("|");
 			System.out.printf("%-8d", shelterPet.getHungerLevel());
 			System.out.print("|");
@@ -48,14 +46,19 @@ public class VirtualPetShelterApp {
 			System.out.println();
 
 		} // end for loop
+
 	} // end displayPetStatus()
 
 	public static void handleVolunteerActions(VirtualPetShelter myShelter) {
-		
+
 		Scanner input = new Scanner(System.in);
 		String userOption = "";
-		
+
 		do {
+			if (myShelter.getNumberOfPets() == 0) {
+				System.out.println("Good news! All pets have been adopted! Please come back soon.");
+				break;
+			}
 			displayPetStatus(myShelter);
 			displayMainMenu();
 			userOption = input.nextLine();
@@ -69,12 +72,20 @@ public class VirtualPetShelterApp {
 				System.out.println("You watered the pets! Thank you!");
 				break;
 			case "3":
+				System.out.println("Great! You'd like to take a pet for a walk. Please choose one:\n");
+				handlePetActivity(myShelter, "walk");
 				break;
 			case "4":
+				System.out.println("Fantastic! You'd like to play with a pet. Please choose one:\n");
+				handlePetActivity(myShelter, "play");
 				break;
 			case "5":
+				System.out.println("Super! You'd like to take a pet outside. Please choose one:\n");
+				handlePetActivity(myShelter, "go-out");
 				break;
 			case "6":
+				System.out.println("Terrific!  You'd like to adopt a pet.  Please choose one: \n");
+				handlePetAdoption(myShelter);
 				break;
 			case "7":
 				break;
@@ -82,14 +93,54 @@ public class VirtualPetShelterApp {
 				System.out.println("Thanks for playing!");
 				break;
 			}
-			
+			myShelter.tick();
+
 		} while (!userOption.equals("8"));
-		
-		
+
 	}
-	
-	public static void displayMainMenu() { 
-		
+
+	public static void handlePetActivity(VirtualPetShelter myShelter, String activity) {
+
+		displayPetNamesAndDescriptions(myShelter);
+		Scanner input = new Scanner(System.in);
+		String petName = input.nextLine();
+		if (activity.equals("walk")) {
+			myShelter.walkAPet(petName);
+			System.out.println("Thanks for walking " + petName + "!\n\n");
+		} else if (activity.equals("play")) {
+			myShelter.playWithAPet(petName);
+			System.out.println("Thanks for playing with " + petName + "!\n\n");
+		} else if (activity.equals("go-out")) {
+			myShelter.takeAPetOutside(petName);
+			System.out.println("Thanks for taking " + petName + "outside!\n\n");
+
+		}
+		// input.close();
+	}
+
+	public static void displayPetNamesAndDescriptions(VirtualPetShelter myShelter) {
+		String name = "";
+		Collection<VirtualPet> shelterPets = myShelter.getPets();
+		for (VirtualPet shelterPet : shelterPets) {
+			name = "[" + shelterPet.getName() + "]";
+			System.out.printf("%-15s", name);
+			System.out.printf("%-25s", shelterPet.getDescription());
+			System.out.println();
+		}
+
+	}
+
+	public static void handlePetAdoption(VirtualPetShelter myShelter) {
+
+		displayPetNamesAndDescriptions(myShelter);
+		Scanner input = new Scanner(System.in);
+		String petName = input.nextLine();
+		myShelter.releasePet(petName);
+		System.out.println(petName + " is going to a great home!\n\n");
+	}
+
+	public static void displayMainMenu() {
+
 		System.out.println("\nWhat would you like to do next?\n");
 		System.out.println("\t1. Feed the pets");
 		System.out.println("\t2. Water the pets");
@@ -99,7 +150,7 @@ public class VirtualPetShelterApp {
 		System.out.println("\t6. Adopt a pet");
 		System.out.println("\t7. Admit a pet");
 		System.out.println("\t8. Quit");
-		
+
 	}
 
 }

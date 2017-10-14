@@ -3,7 +3,7 @@ public class VirtualPet {
 
 	// attributes
 	private String name;
-	private String Description;
+	private String description;
 	private int hungerLevel;
 	private int thirstLevel;
 	private int activityLevel;
@@ -13,7 +13,7 @@ public class VirtualPet {
 	// constructor - takes all attributes as parameters
 	public VirtualPet(String name, String description, int hungerLevel, int thirstLevel, int activityLevel, boolean bNeedsToPee, boolean bNeedsToPoop) {
 		this.name = name;
-		this.Description = description;
+		this.description = description;
 		this.hungerLevel = hungerLevel;
 		this.thirstLevel = thirstLevel;
 		this.activityLevel = activityLevel;
@@ -25,7 +25,7 @@ public class VirtualPet {
 	// other values set to default
 	public VirtualPet(String name, String description) {
 		this.name = name;
-		this.Description = description;
+		this.description = description;
 		this.hungerLevel = 10;
 		this.thirstLevel = 10;
 		this.activityLevel = 10;
@@ -37,7 +37,7 @@ public class VirtualPet {
 	// except the need to pee or poop
 		public VirtualPet(String name, String description, int hungerLevel, int thirstLevel, int activityLevel) {
 			this.name = name;
-			this.Description = description;
+			this.description = description;
 			this.hungerLevel = hungerLevel;
 			this.thirstLevel = thirstLevel;
 			this.activityLevel = activityLevel;
@@ -50,11 +50,16 @@ public class VirtualPet {
 	public String getName() {
 		return name;
 	}
+	
+	public String getDescription() {
+		return description;
+	}
 
+	/*
 	public String getFullName() {
 		String fullName = name + " " + Description;
 		return fullName;
-	}
+	}*/
 
 	public int getHungerLevel() {
 		return hungerLevel;
@@ -150,5 +155,11 @@ public class VirtualPet {
 			activityLevel += 5;
 		}
 	}
+
+	void goOut() {
+		needsToPee = false;
+		needsToPoop = false;
+	}
+
 
 }

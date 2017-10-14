@@ -47,15 +47,42 @@ public class VirtualPetShelter {
 		}
 	}
 
+	//If the user supplies a pet name that does not exist, the Virtual Pet object returned
+	//by the get method will be null.  Since we are not doing front end editing, check it here
+	//to make sure it is not null before calling goForWalk() so that we don't crash with a 
+	//null pointer exception.
 	public void walkAPet(String name) {
+		
 		VirtualPet aPet = pets.get(name);
-		aPet.goForWalk();
+		if (aPet != null) {
+			aPet.goForWalk();
+		}
 
 	}
 
-	public void PlayWithAPet(String name) {
+	//If the user supplies a pet name that does not exist, the Virtual Pet object returned
+	//by the get method will be null.  Since we are not doing front end editing, check it here
+	//to make sure it is not null before calling play() so that we don't crash with a 
+	//null pointer exception.
+	public void playWithAPet(String name) {
+		
 		VirtualPet aPet = pets.get(name);
-		aPet.play();
+		if (aPet != null) {
+			aPet.play();
+		}
+
+	}
+
+	//If the user supplies a pet name that does not exist, the Virtual Pet object returned
+	//by the get method will be null.  Since we are not doing front end editing, check it here
+	//to make sure it is not null before calling play() so that we don't crash with a 
+	//null pointer exception.
+	public void takeAPetOutside(String name) {
+		
+		VirtualPet aPet = pets.get(name);
+		if (aPet != null) {
+			aPet.goOut();
+		}
 
 	}
 
