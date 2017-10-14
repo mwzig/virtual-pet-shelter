@@ -70,7 +70,7 @@ public class VirtualPetShelterApp {
 				handlePetCheck(myShelter);
 				break;
 			case "10":
-				System.out.println("You loved our pizza!");
+				System.out.println("You loved our pizza!\n\n");
 				break;
 			case "11":
 				System.out.println("Thanks for playing the Virtual Pet Shelter game!");
@@ -172,7 +172,7 @@ public class VirtualPetShelterApp {
 			myShelter.cleanCage(petName);
 			System.out.println("Thanks for cleaning the cage for " + petName + "!\n\n");
 		}
-	
+
 	}
 
 	public static void handlePetAdoption(VirtualPetShelter myShelter) {
@@ -189,7 +189,7 @@ public class VirtualPetShelterApp {
 			myShelter.releasePet(petName);
 			System.out.println(petName + " is going to a great home!\n\n");
 		}
-		
+
 	}
 
 	public static void handlePetAdmission(VirtualPetShelter myShelter) {
@@ -205,7 +205,7 @@ public class VirtualPetShelterApp {
 			myShelter.addPet(new VirtualPet(petName, petDescription));
 			System.out.println("Don't worry, we will find a great home for " + petName + "!\n\n");
 		}
-		
+
 	}
 
 	public static void handlePetCheck(VirtualPetShelter myShelter) {
@@ -222,7 +222,7 @@ public class VirtualPetShelterApp {
 			System.out.println(petToCheck.getStatus());
 			System.out.println("Thanks for checking on " + petName + "!\n\n");
 		}
-		
+
 	}
 
 }
