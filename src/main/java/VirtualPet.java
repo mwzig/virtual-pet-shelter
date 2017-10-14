@@ -119,7 +119,7 @@ public class VirtualPet {
 		} else {
 			if (!needsSomething) {
 				status += "Great Job! ";
-				status += this.name + "does not need anything right now! You are taking wonderful care of " + this.name
+				status += this.name + " does not need anything right now! You are taking wonderful care of " + this.name
 						+ "!";
 			}
 		}
