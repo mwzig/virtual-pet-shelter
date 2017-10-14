@@ -107,18 +107,20 @@ public class VirtualPet {
 			if (needsToPoop) {
 				status += "Needs to poop! ";
 			}
-			if (needsToPoop) {
+			if (madeAMess) {
 				status += "Made a mess!";
 			}
 
 			status += ")";
 		}
-		
+
 		if (hungerLevel >= 50 && thirstLevel >= 50 && activityLevel < 33 && needsToPee && needsToPoop) {
-			status += "\nUh-Oh!!!  You have not been taking good care of " + this.name;
+			status += "\nUh-Oh!!!  You have not been taking good care of " + this.name + ".";
 		} else {
 			if (!needsSomething) {
-				status += "Great Job! You are taking wonderful care of " + this.name;
+				status += "Great Job! ";
+				status += this.name + "does not need anything right now! You are taking wonderful care of " + this.name
+						+ "!";
 			}
 		}
 		return status;

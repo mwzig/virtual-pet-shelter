@@ -14,6 +14,7 @@ public class VirtualPetShelterApp {
 	}
 
 	public static void displayWelcomeMessage() {
+
 		System.out.println("Welcome to Hound Dogz Virtual Pet Shelter!");
 		System.out.println("Thank you for volunteering! We provide free pizza for helping!\n");
 	}
@@ -52,7 +53,7 @@ public class VirtualPetShelterApp {
 				System.out.println("Super! You'd like to take a pet outside. Please choose one:\n");
 				handlePetActivity(myShelter, "go-out");
 				break;
-			case "6": // clean
+			case "6":
 				System.out.println("Wonderful! You'd like to clean a cage. Please choose which Pet's cage:\n");
 				handlePetActivity(myShelter, "clean");
 				break;
@@ -65,7 +66,7 @@ public class VirtualPetShelterApp {
 				handlePetAdmission(myShelter);
 				break;
 			case "9":
-				System.out.println("No Problem! You want to check on a specific pet.  Please choose one:  \n");
+				System.out.println("No Problem! You want to check on a specific pet.  Please choose one:  9\n");
 				handlePetCheck(myShelter);
 				break;
 			case "10":
@@ -78,6 +79,7 @@ public class VirtualPetShelterApp {
 			myShelter.tick();
 
 		} while (!userOption.equals("11"));
+		input.close();
 
 	}
 
@@ -119,6 +121,34 @@ public class VirtualPetShelterApp {
 
 	} // end displayPetStatus()
 
+	public static void displayMainMenu() {
+
+		System.out.println("\nWhat would you like to do next?\n");
+		System.out.println("\t1. Feed the pets");
+		System.out.println("\t2. Water the pets");
+		System.out.println("\t3. Walk a pet");
+		System.out.println("\t4. Play with a pet");
+		System.out.println("\t5. Let a pet go outside");
+		System.out.println("\t6. Clean a cage");
+		System.out.println("\t7. Adopt a pet");
+		System.out.println("\t8. Admit a pet");
+		System.out.println("\t9. Check on a specific pet");
+		System.out.println("\t10. Eat pizza");
+		System.out.println("\t11. Quit");
+	}
+
+	public static void displayPetNamesAndDescriptions(VirtualPetShelter myShelter) {
+
+		String name = "";
+		Collection<VirtualPet> shelterPets = myShelter.getAllPets();
+		for (VirtualPet shelterPet : shelterPets) {
+			name = "[" + shelterPet.getName() + "]";
+			System.out.printf("%-15s", name);
+			System.out.printf("%-25s", shelterPet.getDescription());
+			System.out.println();
+		}
+	}
+
 	public static void handlePetActivity(VirtualPetShelter myShelter, String activity) {
 
 		displayPetNamesAndDescriptions(myShelter);
@@ -142,19 +172,7 @@ public class VirtualPetShelterApp {
 			myShelter.cleanCage(petName);
 			System.out.println("Thanks for cleaning the cage for " + petName + "!\n\n");
 		}
-		// input.close();
-	}
-
-	public static void displayPetNamesAndDescriptions(VirtualPetShelter myShelter) {
-		String name = "";
-		Collection<VirtualPet> shelterPets = myShelter.getAllPets();
-		for (VirtualPet shelterPet : shelterPets) {
-			name = "[" + shelterPet.getName() + "]";
-			System.out.printf("%-15s", name);
-			System.out.printf("%-25s", shelterPet.getDescription());
-			System.out.println();
-		}
-
+	
 	}
 
 	public static void handlePetAdoption(VirtualPetShelter myShelter) {
@@ -171,22 +189,7 @@ public class VirtualPetShelterApp {
 			myShelter.releasePet(petName);
 			System.out.println(petName + " is going to a great home!\n\n");
 		}
-	}
-
-	public static void handlePetCheck(VirtualPetShelter myShelter) {
-
-		displayPetNamesAndDescriptions(myShelter);
-		Scanner input = new Scanner(System.in);
-		String petName = input.nextLine();
-		// the user may have typed an invalid name, if so give them a message and
-		// go back to the menu
-		VirtualPet petToCheck = myShelter.getPet(petName);
-		if (petToCheck == null) { 
-			System.out.println("Sorry, the name you typed does not match one of our pets.");
-		} else {
-			System.out.println(petToCheck.getStatus());
-			System.out.println("Thanks for checking on " + petName + "!\n\n");
-		}
+		
 	}
 
 	public static void handlePetAdmission(VirtualPetShelter myShelter) {
@@ -202,23 +205,24 @@ public class VirtualPetShelterApp {
 			myShelter.addPet(new VirtualPet(petName, petDescription));
 			System.out.println("Don't worry, we will find a great home for " + petName + "!\n\n");
 		}
+		
 	}
 
-	public static void displayMainMenu() {
+	public static void handlePetCheck(VirtualPetShelter myShelter) {
 
-		System.out.println("\nWhat would you like to do next?\n");
-		System.out.println("\t1. Feed the pets");
-		System.out.println("\t2. Water the pets");
-		System.out.println("\t3. Walk a pet");
-		System.out.println("\t4. Play with a pet");
-		System.out.println("\t5. Let a pet go outside");
-		System.out.println("\t6. Clean a cage");
-		System.out.println("\t7. Adopt a pet");
-		System.out.println("\t8. Admit a pet");
-		System.out.println("\t9. Check on a specific pet");
-		System.out.println("\t10. Eat pizza");
-		System.out.println("\t11. Quit");
-
+		displayPetNamesAndDescriptions(myShelter);
+		Scanner input = new Scanner(System.in);
+		String petName = input.nextLine();
+		// the user may have typed an invalid name, if so give them a message and
+		// go back to the menu
+		VirtualPet petToCheck = myShelter.getPet(petName);
+		if (petToCheck == null) {
+			System.out.println("Sorry, the name you typed does not match one of our pets.");
+		} else {
+			System.out.println(petToCheck.getStatus());
+			System.out.println("Thanks for checking on " + petName + "!\n\n");
+		}
+		
 	}
 
 }

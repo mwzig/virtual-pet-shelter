@@ -17,6 +17,12 @@ public class VirtualPetShelterTest {
 		assertEquals(10, check2);
 		check2 = underTest.getThirstLevel();
 		assertEquals(10, check2);
+		boolean check3 = underTest.getNeedsToPee();
+		assertEquals(false, check3);
+		check3 = underTest.getNeedsToPoop();
+		assertEquals(false, check3);
+		check3 = underTest.getMadeAMess();
+		assertEquals(false, check3);
 
 	}
 
@@ -29,16 +35,12 @@ public class VirtualPetShelterTest {
 		assertEquals(2, check);
 	}
 
-	// ask how to assertNull(check) on the test below
 	@Test
 	public void testReleaseNonExistingPetFails() {
 		VirtualPetShelter underTest = new VirtualPetShelter();
 		underTest.addPet(new VirtualPet("fido", "the ferocius", 5, 5, 5));
 		VirtualPet check = underTest.releasePet("feefee");
-		// VirtualPet checkPet = new VirtualPet("spot", "the dog", 5,5,5);
-		// assertEquals(null, check);
 		assertNull(check);
-		// assertEquals(checkPet, check);
 	}
 
 	@Test
@@ -46,9 +48,16 @@ public class VirtualPetShelterTest {
 		VirtualPetShelter underTest = new VirtualPetShelter();
 		VirtualPet testPet = new VirtualPet("fido", "the ferocius", 5, 5, 5);
 		underTest.addPet(testPet);
+		underTest.addPet(new VirtualPet("feefee", "the furious", 5, 5, 5));
 		VirtualPet check = underTest.releasePet("fido");
+		// we are comparing the object we create to the object returned on the release
+		// they should be the same because removing something from a HashMap returns
+		// the object if it exists.
 		assertEquals(testPet, check);
-
+		// another check to do is to check the count. Since we added 2 and removed 1,
+		// the count should be 1
+		int check2 = underTest.getNumberOfPets();
+		assertEquals(1, check2);
 	}
 
 	@Test
@@ -221,60 +230,3 @@ public class VirtualPetShelterTest {
 	}
 
 }
-/*
- * @Test public void shouldBeAbleToCreateABankAccountWithData() { // accountNum,
- * type, balance passed on constructor BankAccount underTest = new
- * BankAccount("1111", "Checking", 5000.05); double check =
- * underTest.getBalance(); assertEquals(5000.05, check, .01); }
- * 
- * @Test public void assertThatAccountIsFound() { // accountNum, type, balance
- * passed on constructor Bank underTest = new Bank();
- * underTest.addBankAccount(new BankAccount("1111", "Checking", 5000.05));
- * String check = underTest.getAccount("1111").getAccountNum(); assertEquals(3,
- * check); }
- * 
- * @Test public void shouldBeAbleToWithDrawFunds() { // accountNum, type,
- * balance passed on constructor BankAccount underTest = new BankAccount("1111",
- * "Checking", 5000.05); underTest.withDraw(500.05); double check =
- * underTest.getBalance(); assertEquals(4500.00, check, .01); }
- * 
- * @Test public void shouldBeAbleToDepositFunds() { // accountNum, type, balance
- * passed on constructor BankAccount underTest = new BankAccount("1111",
- * "Checking", 5000.05); underTest.deposit(500.05); double check =
- * underTest.getBalance(); assertEquals(5500.10, check, .01); }
- * 
- * @Test public void assertThatAddingAccountsChangesTotalNumAccounts() {
- * 
- * Bank underTest = new Bank(); underTest.addBankAccount(new BankAccount("1111",
- * "Checking", 500.00)); underTest.addBankAccount(new BankAccount("2222",
- * "Savings", 2500.00)); int check = underTest.getTotalNumOfAccounts();
- * assertEquals(2, check); }
- * 
- * @Test public void assertThatRemovingAccountChangesTotalNumAccounts() { Bank
- * underTest = new Bank(); underTest.addBankAccount(new BankAccount("1111",
- * "Checking", 500.00)); underTest.addBankAccount(new BankAccount("2222",
- * "Savings", 2500.00)); underTest.closeBankAccount("1111"); int check =
- * underTest.getTotalNumOfAccounts(); assertEquals(1, check); }
- * 
- * @Test public void assertThatGetTotalBankDollarsReturns3000() {
- * 
- * Bank underTest = new Bank(); underTest.addBankAccount(new BankAccount("1111",
- * "Checking", 500.00)); underTest.addBankAccount(new BankAccount("2222",
- * "Savings", 2500.00)); double check = underTest.getTotalBankDollars();
- * assertEquals(3000.00, check, .01); } /*
- * 
- * @Test public void assertThatGetTotalBoxesReturnsSeven() { Order underTest =
- * new Order(); underTest.addItem(new Item("shirt", 14.99, 3));
- * underTest.addItem(new Item("shirt", 14.99, 4)); int check =
- * underTest.getTotalItems(); assertEquals(7, check);
- * 
- * }
- * 
- * @Test public void assertThatRemoveItemRemovesItems() { Order underTest = new
- * Order(); underTest.addItem(new Item("shirt", 14.99, 3));
- * underTest.addItem(new Item("pants", 12.99, 4)); underTest.addItem(new
- * Item("shirt", 15.99, 3)); underTest.removeItem("shirt"); int check =
- * underTest.getTotalItems(); assertEquals(3, check);
- * 
- * }
- */
