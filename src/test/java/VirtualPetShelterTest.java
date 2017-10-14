@@ -23,7 +23,6 @@ public class VirtualPetShelterTest {
 		assertEquals(false, check3);
 		check3 = underTest.getMadeAMess();
 		assertEquals(false, check3);
-
 	}
 
 	@Test
@@ -68,10 +67,9 @@ public class VirtualPetShelterTest {
 		underTest.addPet(new VirtualPet("spot", "the spotty", 5, 5, 5));
 		int check = underTest.getNumberOfPets();
 		assertEquals(3, check);
-		VirtualPet petToRemove = underTest.releasePet("fido");
+		underTest.releasePet("fido");
 		check = underTest.getNumberOfPets();
 		assertEquals(2, check);
-
 	}
 
 	@Test
@@ -86,7 +84,6 @@ public class VirtualPetShelterTest {
 		VirtualPet pet2 = underTest.getPet("feefee");
 		check = pet2.getHungerLevel();
 		assertEquals(0, check);
-
 	}
 
 	// Verify that after constructing, the pet does not need
@@ -109,7 +106,6 @@ public class VirtualPetShelterTest {
 		pet2 = underTest.getPet("feefee");
 		check = pet2.getNeedsToPoop();
 		assertTrue(check);
-
 	}
 
 	@Test
@@ -124,7 +120,6 @@ public class VirtualPetShelterTest {
 		VirtualPet pet2 = underTest.getPet("feefee");
 		check = pet2.getThirstLevel();
 		assertEquals(0, check);
-
 	}
 
 	@Test
@@ -145,7 +140,6 @@ public class VirtualPetShelterTest {
 		pet2 = underTest.getPet("feefee");
 		check = pet2.getNeedsToPee();
 		assertTrue(check);
-
 	}
 
 	@Test
@@ -155,7 +149,6 @@ public class VirtualPetShelterTest {
 		underTest.playWithAPet("fido");
 		int check = underTest.getPet("fido").getActivityLevel();
 		assertEquals(75, check);
-
 	}
 
 	@Test
@@ -165,7 +158,6 @@ public class VirtualPetShelterTest {
 		underTest.walkAPet("fido");
 		int check = underTest.getPet("fido").getActivityLevel();
 		assertEquals(75, check);
-
 	}
 
 	@Test
@@ -180,7 +172,6 @@ public class VirtualPetShelterTest {
 		underTest.walkAPet("fido");
 		check = underTest.getPet("fido").getNeedsToPoop();
 		assertEquals(false, check);
-
 	}
 
 	@Test
@@ -195,7 +186,6 @@ public class VirtualPetShelterTest {
 		underTest.walkAPet("fido");
 		check = underTest.getPet("fido").getNeedsToPee();
 		assertEquals(false, check);
-
 	}
 
 	@Test
@@ -226,7 +216,6 @@ public class VirtualPetShelterTest {
 		assertEquals(25, check21);
 		assertEquals(25, check22);
 		assertEquals(60, check23);
-
 	}
 
 }
