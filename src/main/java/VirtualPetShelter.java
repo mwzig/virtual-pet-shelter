@@ -5,7 +5,7 @@ import java.util.Map.Entry;
 
 public class VirtualPetShelter {
 
-	private Map<String, VirtualPet> pets = new HashMap<String, VirtualPet>(0);
+	private Map<String, VirtualPet> pets = new HashMap<String, VirtualPet>();
 
 	// This method returns a Collection of Virtual Pet objects
 	// It mimics the Pet Shelter's database of Virtual Pets.
