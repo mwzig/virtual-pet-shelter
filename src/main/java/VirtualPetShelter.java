@@ -28,23 +28,24 @@ public class VirtualPetShelter {
 
 	public void feedPets() {
 
-		for (Entry<String, VirtualPet> eachPet : pets.entrySet()) {
-			eachPet.getValue().eat();
+		for (VirtualPet eachPet : getAllPets()) {
+			eachPet.eat();
 		}
 	}
 
 	public void waterPets() {
 
-		for (Entry<String, VirtualPet> eachPet : pets.entrySet()) {
-			eachPet.getValue().drink();
+		for (VirtualPet eachPet : getAllPets()) {
+			eachPet.drink();
 		}
 	}
 
 	public void tick() {
 
-		for (Entry<String, VirtualPet> eachPet : pets.entrySet()) {
-			eachPet.getValue().tick();
+		for (VirtualPet eachPet : getAllPets()) {
+			eachPet.tick();
 		}
+
 	}
 
 	// If a name is supplied that does not exist, the Virtual Pet object "returned"

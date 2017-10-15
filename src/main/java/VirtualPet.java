@@ -178,4 +178,10 @@ public class VirtualPet {
 
 	}
 
+	public String toString() {
+		String returnString = name + ";" + description + ";" + hungerLevel + ";" + thirstLevel + ";" + activityLevel
+				+ ";" + needsToPee + ";" + needsToPoop + ";" + madeAMess;
+		return returnString;
+	}
+
 }
