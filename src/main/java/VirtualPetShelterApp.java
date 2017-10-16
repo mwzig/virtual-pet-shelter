@@ -94,6 +94,7 @@ public class VirtualPetShelterApp {
 		System.out.println("---------------|--------|--------|---------------|---------------|----------");
 
 		Collection<VirtualPet> shelterPets = myShelter.getAllPets();
+
 		for (VirtualPet shelterPet : shelterPets) {
 			if (shelterPet.getNeedsToPee() || shelterPet.getNeedsToPoop()) {
 				needsToGoOut = "Yes!";
